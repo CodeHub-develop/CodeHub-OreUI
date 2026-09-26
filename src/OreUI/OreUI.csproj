@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>CodeHub-OreUI</PackageId>
+    <Title>CodeHub-OreUI</Title>
+    <Description>OreUI — Minecraft Bedrock Edition 风格的 Avalonia 控件库（面板 / 按钮 / 开关 / 滑块 / 下拉 / 列表 / 标签页 / 模态 等）。</Description>
+    <PackageTags>avalonia;minecraft;bedrock;oreui;ui-controls</PackageTags>
+    <RootNamespace>OreUI</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Authors>CodeHub</Authors>
+    <Company>CodeHub</Company>
+    <Product>CodeHub-OreUI</Product>
+    <PackageProjectUrl>https://github.com/CodeHub-develop/CodeHub-OreUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CodeHub-develop/CodeHub-OreUI.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>First release: Minecraft Bedrock (OreUI) style controls for Avalonia 12.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.0.0" />
+  </ItemGroup>
+
+</Project>

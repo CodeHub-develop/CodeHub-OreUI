@@ -1,0 +1,33 @@
+# Build results
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+# MSBuild / Visual Studio
+*.user
+*.userprefs
+*.suo
+*.cache
+*.binlog
+
+# IDE
+.vs/
+.idea/
+*.swp
+
+# NuGet packages (locally produced)
+*.nupkg
+*.snupkg
+nuget-packages/
+artifacts/
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Test results
+TestResults/
+
+# Local environment
+*.local

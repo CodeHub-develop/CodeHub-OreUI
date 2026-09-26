@@ -1,0 +1,59 @@
+name: Publish to NuGet (Trusted Publishing)
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Package version, e.g. 1.0.0 (ignored when pushed on a v* tag)'
+        required: true
+        default: '1.0.0'
+
+# Top-level read-only by default; the publish job grants itself OIDC.
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Pack & Publish
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # Required: lets GitHub issue an OIDC token for NuGet trusted publishing
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            # Strip the leading 'v' from a tag like v1.0.0
+            echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Restore
+        run: dotnet restore src/OreUI/OreUI.csproj
+
+      - name: Pack
+        run: dotnet pack src/OreUI/OreUI.csproj -c Release -p:Version=${{ steps.version.outputs.version }} -o ./artifacts
+
+      - name: NuGet login (OIDC -> short-lived API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          # NuGet.org username (NOT your email). Store it as the NUGET_USER secret.
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Push to NuGet.org
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

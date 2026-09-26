@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- 设计 token（颜色 / 画笔 / 间距 / 圆角 / 字体） -->
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+      <ResourceInclude Source="avares://OreUI/Themes/Tokens.axaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <!-- 原生控件的 OreUI 风格（Button / Toggle / CheckBox / Radio / Slider / TextBox / ComboBox） -->
+  <StyleInclude Source="avares://OreUI/Themes/Native.axaml"/>
+
+  <!-- OreUI 专属控件（Panel / Divider / Header / Spinner / Tag / MenuRow / SelectionList / Modal / Tabs） -->
+  <StyleInclude Source="avares://OreUI/Themes/Custom.axaml"/>
+
+</Styles>

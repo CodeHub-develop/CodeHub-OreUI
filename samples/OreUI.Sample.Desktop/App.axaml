@@ -1,0 +1,11 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OreUI.Sample.App">
+
+  <Application.Styles>
+    <!-- 基础主题提供默认控件模板（ProgressBar 等），OreUI 在其上覆盖视觉 -->
+    <FluentTheme />
+    <StyleInclude Source="avares://OreUI/Themes/OreUITheme.axaml" />
+  </Application.Styles>
+
+</Application>

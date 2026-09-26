@@ -1,0 +1,381 @@
+<Styles xmlns="https://github.com/avaloniaui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+      <ResourceInclude Source="avares://OreUI/Themes/Tokens.axaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ====================== ToggleSwitch（off 灰 / on 绿） ====================== -->
+    <ControlTheme x:Key="OreToggleTheme" TargetType="ToggleSwitch">
+      <Setter Property="OffContent" Value=""/>
+      <Setter Property="OnContent" Value=""/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+            <Grid Grid.Column="0" Width="40" Height="22">
+              <Border x:Name="PART_Border"
+                      Background="{DynamicResource OrePanelAltBrush}"
+                      BorderBrush="{DynamicResource OreBorderBrush}"
+                      BorderThickness="1" CornerRadius="11"/>
+              <Canvas x:Name="PART_MovingKnobs">
+                <Ellipse x:Name="PART_Knob" Width="16" Height="16" Fill="#FFFFFF"
+                         HorizontalAlignment="Left" Margin="3,0,0,0">
+                  <Ellipse.Transitions>
+                    <Transitions>
+                      <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
+                    </Transitions>
+                  </Ellipse.Transitions>
+                </Ellipse>
+              </Canvas>
+            </Grid>
+            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}"
+                              VerticalAlignment="Center"
+                              Foreground="{DynamicResource OreTextBrush}"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:checked /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource OreAccentBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+      </Style>
+      <Style Selector="^:checked /template/ Ellipse#PART_Knob">
+        <Setter Property="Margin" Value="21,0,0,0"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource OreSurfaceHoverBrush}"/>
+      </Style>
+      <Style Selector="^:checked:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource OreAccentHoverBrush}"/>
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.5"/>
+      </Style>
+    </ControlTheme>
+
+    <!-- ====================== CheckBox ====================== -->
+    <ControlTheme x:Key="OreCheckBoxTheme" TargetType="CheckBox">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+            <Grid Grid.Column="0" Width="20" Height="20">
+              <Border x:Name="PART_Box"
+                      Background="Transparent"
+                      BorderBrush="{DynamicResource OreBorderBrush}"
+                      BorderThickness="2" CornerRadius="3"/>
+              <Path x:Name="PART_Check" Data="M4,10 L9,15 L16,5"
+                    Stroke="#FFFFFF" StrokeThickness="2.5"
+                    StrokeLineCap="Round" StrokeJoin="Round" IsVisible="False"/>
+            </Grid>
+            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}"
+                              VerticalAlignment="Center"
+                              Foreground="{TemplateBinding Foreground}"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:checked /template/ Border#PART_Box">
+        <Setter Property="Background" Value="{DynamicResource OreAccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource OreAccentBrush}"/>
+      </Style>
+      <Style Selector="^:checked /template/ Path#PART_Check">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#PART_Box">
+        <Setter Property="BorderBrush" Value="{DynamicResource OreTextMutedBrush}"/>
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.5"/>
+      </Style>
+    </ControlTheme>
+
+    <!-- ====================== RadioButton ====================== -->
+    <ControlTheme x:Key="OreRadioTheme" TargetType="RadioButton">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+            <Grid Grid.Column="0" Width="20" Height="20">
+              <Ellipse x:Name="PART_Ring" Fill="Transparent"
+                       Stroke="{DynamicResource OreBorderBrush}" StrokeThickness="2"/>
+              <Ellipse x:Name="PART_Dot" Width="10" Height="10"
+                       Fill="{DynamicResource OreAccentBrush}" IsVisible="False"/>
+            </Grid>
+            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}"
+                              VerticalAlignment="Center"
+                              Foreground="{TemplateBinding Foreground}"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:checked /template/ Ellipse#PART_Ring">
+        <Setter Property="Stroke" Value="{DynamicResource OreAccentBrush}"/>
+      </Style>
+      <Style Selector="^:checked /template/ Ellipse#PART_Dot">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Ellipse#PART_Ring">
+        <Setter Property="Stroke" Value="{DynamicResource OreTextMutedBrush}"/>
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.5"/>
+      </Style>
+    </ControlTheme>
+
+    <!-- ====================== Slider ====================== -->
+    <ControlTheme x:Key="OreSliderTheme" TargetType="Slider">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid RowDefinitions="Auto,Auto,Auto">
+            <Track Grid.Row="1" Name="PART_Track"
+                   Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+                   Value="{TemplateBinding Value}" Orientation="{TemplateBinding Orientation}">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_DecreaseButton" Focusable="False"
+                             Background="{DynamicResource OreAccentBrush}">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Border Background="{TemplateBinding Background}" CornerRadius="2" Height="4"/>
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_IncreaseButton" Focusable="False"
+                             Background="{DynamicResource OrePanelAltBrush}">
+                  <RepeatButton.Template>
+                    <ControlTemplate>
+                      <Border Background="{TemplateBinding Background}" CornerRadius="2" Height="4"/>
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.IncreaseButton>
+              <Thumb Name="PART_Thumb" Width="16" Height="16"
+                     Background="#FFFFFF" CornerRadius="8"/>
+            </Track>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Thumb#PART_Thumb">
+        <Setter Property="Background" Value="{DynamicResource OreTextMutedBrush}"/>
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.5"/>
+      </Style>
+    </ControlTheme>
+
+    <!-- ====================== TextBox（Input） ====================== -->
+    <ControlTheme x:Key="OreTextBoxTheme" TargetType="TextBox">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}"/>
+      <Setter Property="CaretBrush" Value="{DynamicResource OreAccentBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource OrePanelAltBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource OreBorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Padding" Value="10,8"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="PART_Border"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Disabled"
+                          Margin="{TemplateBinding Padding}">
+              <TextPresenter Name="PART_TextPresenter"
+                             Text="{TemplateBinding Text}"/>
+            </ScrollViewer>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource OreTextMutedBrush}"/>
+      </Style>
+      <Style Selector="^:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource OreAccentBrush}"/>
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.5"/>
+      </Style>
+    </ControlTheme>
+
+    <!-- ====================== ComboBox（Dropdown） ====================== -->
+    <ControlTheme x:Key="OreComboBoxItemTheme" TargetType="ComboBoxItem">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}"/>
+      <Setter Property="Padding" Value="10,8"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="PART_Border" Background="Transparent" Padding="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource OreSurfaceHoverBrush}"/>
+      </Style>
+      <Style Selector="^:selected /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource OrePanelAltBrush}"/>
+      </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="OreComboBoxTheme" TargetType="ComboBox">
+      <Setter Property="ItemContainerTheme" Value="{StaticResource OreComboBoxItemTheme}"/>
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource OrePanelAltBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource OreBorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Padding" Value="10,8"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid>
+            <Border Name="PART_Border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+              <Grid ColumnDefinitions="*,Auto">
+                <ContentPresenter Grid.Column="0"
+                                 Content="{TemplateBinding SelectionBoxItem}"
+                                 VerticalAlignment="Center"
+                                 Margin="{TemplateBinding Padding}"
+                                 Foreground="{TemplateBinding Foreground}"/>
+                <Path Grid.Column="1" Data="M0,0 L4,4 L8,0"
+                      Stroke="{DynamicResource OreTextMutedBrush}"
+                      StrokeThickness="1.5" HorizontalAlignment="Center"
+                      VerticalAlignment="Center" Margin="6,0,8,0"/>
+              </Grid>
+            </Border>
+            <Popup Name="PART_Popup"
+                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                   MinWidth="{Binding #PART_Border.Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}">
+              <Border Background="{DynamicResource OrePanelBrush}"
+                      BorderBrush="{DynamicResource OreBorderBrush}"
+                      BorderThickness="1" CornerRadius="4" Padding="2">
+                <ScrollViewer MaxHeight="240">
+                  <ItemsPresenter Name="PART_ItemsPresenter">
+                    <ItemsPresenter.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel/>
+                      </ItemsPanelTemplate>
+                    </ItemsPresenter.ItemsPanel>
+                  </ItemsPresenter>
+                </ScrollViewer>
+              </Border>
+            </Popup>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource OreTextMutedBrush}"/>
+      </Style>
+      <Style Selector="^:focus /template/ Border#PART_Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource OreAccentBrush}"/>
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.5"/>
+      </Style>
+    </ControlTheme>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <!-- ====================== .ore 门控（原生控件套用 OreUI 风格） ====================== -->
+  <Style Selector="Button.ore">
+    <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource OreSurfaceHoverBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource OreBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="4"/>
+    <Setter Property="Padding" Value="16,8"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Margin="{TemplateBinding Padding}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="Button.ore:pointerover">
+    <Setter Property="Background" Value="{DynamicResource OreSurfacePressedBrush}"/>
+  </Style>
+  <Style Selector="Button.ore:pressed">
+    <Setter Property="Background" Value="{DynamicResource OreSurfacePressedBrush}"/>
+  </Style>
+  <Style Selector="Button.ore:disabled">
+    <Setter Property="Foreground" Value="{DynamicResource OreTextDisabledBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource OrePanelAltBrush}"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+
+  <!-- 按钮变体 -->
+  <Style Selector="Button.ore.primary, Button.ore.hero">
+    <Setter Property="Background" Value="{DynamicResource OreAccentBrush}"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Foreground" Value="#FFFFFF"/>
+  </Style>
+  <Style Selector="Button.ore.primary:pointerover, Button.ore.hero:pointerover">
+    <Setter Property="Background" Value="{DynamicResource OreAccentHoverBrush}"/>
+  </Style>
+  <Style Selector="Button.ore.primary:pressed, Button.ore.hero:pressed">
+    <Setter Property="Background" Value="{DynamicResource OreAccentPressedBrush}"/>
+  </Style>
+
+  <Style Selector="Button.ore.secondary">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource OreBorderBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}"/>
+  </Style>
+  <Style Selector="Button.ore.secondary:pointerover">
+    <Setter Property="Background" Value="{DynamicResource OreSurfaceHoverBrush}"/>
+  </Style>
+
+  <Style Selector="Button.ore.destructive">
+    <Setter Property="Background" Value="{DynamicResource OreDestructiveBrush}"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Foreground" Value="#FFFFFF"/>
+  </Style>
+  <Style Selector="Button.ore.destructive:pointerover">
+    <Setter Property="Background" Value="{DynamicResource OreDestructiveHoverBrush}"/>
+  </Style>
+  <Style Selector="Button.ore.destructive:pressed">
+    <Setter Property="Background" Value="{DynamicResource OreDestructivePressedBrush}"/>
+  </Style>
+
+  <Style Selector="ToggleSwitch.ore">
+    <Setter Property="Theme" Value="{StaticResource OreToggleTheme}"/>
+  </Style>
+  <Style Selector="CheckBox.ore">
+    <Setter Property="Theme" Value="{StaticResource OreCheckBoxTheme}"/>
+  </Style>
+  <Style Selector="RadioButton.ore">
+    <Setter Property="Theme" Value="{StaticResource OreRadioTheme}"/>
+  </Style>
+  <Style Selector="Slider.ore">
+    <Setter Property="Theme" Value="{StaticResource OreSliderTheme}"/>
+  </Style>
+  <Style Selector="TextBox.ore">
+    <Setter Property="Theme" Value="{StaticResource OreTextBoxTheme}"/>
+  </Style>
+  <Style Selector="ComboBox.ore">
+    <Setter Property="Theme" Value="{StaticResource OreComboBoxTheme}"/>
+  </Style>
+
+  <!-- ====================== ProgressBar（轻量覆盖，依赖基础主题） ====================== -->
+  <Style Selector="ProgressBar.ore">
+    <Setter Property="Foreground" Value="{DynamicResource OreAccentBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource OrePanelAltBrush}"/>
+    <Setter Property="Height" Value="4"/>
+  </Style>
+
+</Styles>

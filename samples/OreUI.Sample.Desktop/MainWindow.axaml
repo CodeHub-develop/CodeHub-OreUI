@@ -1,0 +1,123 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ore="clr-namespace:OreUI.Controls;assembly=OreUI"
+        x:Class="OreUI.Sample.MainWindow"
+        Title="OreUI Demo"
+        Width="920" Height="700"
+        Background="{DynamicResource OreBgBaseBrush}"
+        Foreground="{DynamicResource OreTextBrush}">
+
+  <Grid>
+    <ScrollViewer Padding="20">
+      <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Left">
+
+        <ore:OreHeader Title="设置" ShowBack="True" ShowClose="True" />
+
+        <ore:OrePanel>
+          <StackPanel Spacing="12">
+            <TextBlock Text="按钮 Button" FontWeight="SemiBold" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button Classes="ore hero" Content="Hero" />
+              <Button Classes="ore primary" Content="Primary" />
+              <Button Classes="ore secondary" Content="Secondary" />
+              <Button Classes="ore destructive" Content="Destructive" />
+              <Button Classes="ore" Content="Default" />
+              <Button Classes="ore" Content="Disabled" IsEnabled="False" />
+            </StackPanel>
+          </StackPanel>
+        </ore:OrePanel>
+
+        <ore:OreDivider Classes="horizontal" />
+
+        <ore:OrePanel>
+          <StackPanel Spacing="12">
+            <TextBlock Text="开关 / 选择 Toggle · CheckBox · Radio" FontWeight="SemiBold" />
+              <StackPanel Orientation="Horizontal" Spacing="24">
+                <ToggleSwitch Classes="ore" Content="启用" IsChecked="True" VerticalAlignment="Center" />
+                <ToggleSwitch Classes="ore" Content="关闭" VerticalAlignment="Center" />
+                <CheckBox Classes="ore" Content="记住我" IsChecked="True" VerticalAlignment="Center" />
+                <CheckBox Classes="ore" Content="订阅更新" VerticalAlignment="Center" />
+              </StackPanel>
+              <StackPanel Orientation="Horizontal" Spacing="16">
+                <RadioButton Classes="ore" Content="低" GroupName="quality" IsChecked="True" VerticalAlignment="Center" />
+                <RadioButton Classes="ore" Content="中" GroupName="quality" VerticalAlignment="Center" />
+                <RadioButton Classes="ore" Content="高" GroupName="quality" VerticalAlignment="Center" />
+              </StackPanel>
+          </StackPanel>
+        </ore:OrePanel>
+
+        <ore:OrePanel>
+          <StackPanel Spacing="12">
+            <TextBlock Text="滑块 / 输入框 / 下拉 Slider · TextBox · Dropdown" FontWeight="SemiBold" />
+            <Slider Classes="ore" Width="340" Minimum="0" Maximum="100" Value="60" />
+            <TextBox Classes="ore" Width="340" PlaceholderText="输入世界名称..." />
+            <TextBox Classes="ore" Width="340" PasswordChar="*" Text="secret" />
+            <ComboBox Classes="ore" Width="340" SelectedIndex="0">
+              <ComboBoxItem>快速（Fast）</ComboBoxItem>
+              <ComboBoxItem>普通（Fancy）</ComboBoxItem>
+              <ComboBoxItem>自定义（Custom）</ComboBoxItem>
+            </ComboBox>
+          </StackPanel>
+        </ore:OrePanel>
+
+        <ore:OrePanel>
+          <StackPanel Spacing="12">
+            <TextBlock Text="标签 / 加载 / 进度 Tag · Spinner · ProgressBar" FontWeight="SemiBold" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <ore:OreTag Content="默认" />
+              <ore:OreTag TagVariant="Success" Content="成功" />
+              <ore:OreTag TagVariant="Danger" Content="危险" />
+              <ore:OreTag TagVariant="Warning" Content="警告" />
+              <ore:OreTag TagVariant="Info" Content="信息" />
+              <ore:OreSpinner />
+            </StackPanel>
+            <ProgressBar Classes="ore" Width="340" Value="40" Maximum="100" />
+          </StackPanel>
+        </ore:OrePanel>
+
+        <ore:OrePanel>
+          <StackPanel Spacing="8">
+            <TextBlock Text="选择列表 SelectionList" FontWeight="SemiBold" />
+            <ore:OreSelectionList Height="168">
+              <ore:OreMenuRow Content="游戏设置" Subtitle="画面、音频与控制器" />
+              <ore:OreMenuRow Content="账户" Subtitle="登录与隐私" />
+              <ore:OreMenuRow Content="关于" Subtitle="版本 v1.0.0" />
+            </ore:OreSelectionList>
+          </StackPanel>
+        </ore:OrePanel>
+
+        <ore:OrePanel>
+          <StackPanel Spacing="8">
+            <TextBlock Text="标签页 Tabs" FontWeight="SemiBold" />
+            <TabControl Classes="ore" Height="120">
+              <TabItem Header="常规">
+                <TextBlock Text="常规设置内容" Margin="8" />
+              </TabItem>
+              <TabItem Header="高级">
+                <TextBlock Text="高级设置内容" Margin="8" />
+              </TabItem>
+              <TabItem Header="关于">
+                <TextBlock Text="关于内容" Margin="8" />
+              </TabItem>
+            </TabControl>
+          </StackPanel>
+        </ore:OrePanel>
+
+        <Button Classes="ore primary" Content="打开模态 Modal" Click="OpenModal" HorizontalAlignment="Left" />
+
+      </StackPanel>
+    </ScrollViewer>
+
+    <ore:OreModal x:Name="DemoModal" IsOpen="False">
+      <StackPanel Spacing="12" Width="320">
+        <TextBlock Text="确认操作?" FontWeight="SemiBold" FontSize="16" />
+        <TextBlock Text="此操作将应用到当前实例。" Foreground="{DynamicResource OreTextMutedBrush}" />
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+          <Button Classes="ore secondary" Content="取消" Click="CloseModal" />
+          <Button Classes="ore primary" Content="确定" Click="CloseModal" />
+        </StackPanel>
+      </StackPanel>
+    </ore:OreModal>
+  </Grid>
+
+</Window>
