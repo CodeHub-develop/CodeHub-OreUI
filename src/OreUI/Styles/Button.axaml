@@ -1,0 +1,205 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    OreUI Button
+    9-slice 像素纹理（16px，slice 4px）：纯色填充 + 底部 2px 暗带 + 左上/右下 1px 白色高光
+    （无整圈描边、无垂直渐变，结构对齐 wiki .mcbutton-oreui 真实 CSS）。
+    hover 整块提亮；pressed 压暗 + 内容下沉 1px。
+    变体（Classes）：hero / primary / secondary / contrast / destructive / realm / transparent
+  -->
+
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamily}" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+      <Setter Property="Padding" Value="8,4" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="Button">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="4" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="4" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="4" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="4" />
+            </Grid.ColumnDefinitions>
+
+            <!-- 9-slice 像素纹理 -->
+            <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource Ore9TL}" />
+            <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource Ore9T}" />
+            <Border Grid.Row="0" Grid.Column="2" Background="{DynamicResource Ore9TR}" />
+            <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource Ore9L}" />
+            <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource Ore9C}" />
+            <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource Ore9R}" />
+            <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource Ore9BL}" />
+            <Border Grid.Row="2" Grid.Column="1" Background="{DynamicResource Ore9B}" />
+            <Border Grid.Row="2" Grid.Column="2" Background="{DynamicResource Ore9BR}" />
+
+            <!-- hover 提亮层（Bedrock：整块变亮绿） -->
+            <Border x:Name="PART_Hover" Grid.Row="0" Grid.Column="0"
+                    Grid.RowSpan="3" Grid.ColumnSpan="3"
+                    Background="#1FFFFFFF" IsVisible="False" />
+            <!-- pressed 压暗层 -->
+            <Border x:Name="PART_Pressed" Grid.Row="0" Grid.Column="0"
+                    Grid.RowSpan="3" Grid.ColumnSpan="3"
+                    Background="#33000000" IsVisible="False" />
+
+            <ContentPresenter x:Name="PART_ContentPresenter"
+                              Grid.Row="1" Grid.Column="1"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Margin="{TemplateBinding Padding}"
+                              RenderTransform="translateY(0)" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+
+      <Style Selector="^:pointerover /template/ Border#PART_Hover">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:pressed /template/ Border#PART_Pressed">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="RenderTransform" Value="translateY(1px)" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.5" />
+      </Style>
+    </ControlTheme>
+
+    <!-- 默认（无 class）= secondary 浅灰，黑字 -->
+    <ImageBrush x:Key="Ore9TL" Source="avares://OreUI/Assets/Textures/btn_secondary_tl.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9T" Source="avares://OreUI/Assets/Textures/btn_secondary_t.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9TR" Source="avares://OreUI/Assets/Textures/btn_secondary_tr.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9L" Source="avares://OreUI/Assets/Textures/btn_secondary_l.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9C" Source="avares://OreUI/Assets/Textures/btn_secondary_c.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9R" Source="avares://OreUI/Assets/Textures/btn_secondary_r.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9BL" Source="avares://OreUI/Assets/Textures/btn_secondary_bl.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9B" Source="avares://OreUI/Assets/Textures/btn_secondary_b.png" Stretch="Fill" />
+    <ImageBrush x:Key="Ore9BR" Source="avares://OreUI/Assets/Textures/btn_secondary_br.png" Stretch="Fill" />
+  </Styles.Resources>
+
+  <!-- ============ 变体（官方 7 种） ============ -->
+
+  <!-- primary / hero：基岩绿 -->
+  <Style Selector="Button.primary, Button.hero">
+    <Style.Resources>
+      <ImageBrush x:Key="Ore9TL" Source="avares://OreUI/Assets/Textures/btn_primary_tl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9T" Source="avares://OreUI/Assets/Textures/btn_primary_t.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9TR" Source="avares://OreUI/Assets/Textures/btn_primary_tr.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9L" Source="avares://OreUI/Assets/Textures/btn_primary_l.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9C" Source="avares://OreUI/Assets/Textures/btn_primary_c.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9R" Source="avares://OreUI/Assets/Textures/btn_primary_r.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BL" Source="avares://OreUI/Assets/Textures/btn_primary_bl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9B" Source="avares://OreUI/Assets/Textures/btn_primary_b.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BR" Source="avares://OreUI/Assets/Textures/btn_primary_br.png" Stretch="Fill" />
+    </Style.Resources>
+    <Setter Property="Foreground" Value="#FFFFFF" />
+  </Style>
+
+  <!-- hero：更大字号 + 官方底部 10px -->
+  <Style Selector="Button.hero">
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Padding" Value="20,4,20,10" />
+  </Style>
+
+  <!-- secondary：浅灰底黑字（默认按钮） -->
+  <Style Selector="Button.secondary">
+    <Setter Property="Foreground" Value="#161616" />
+  </Style>
+
+  <!-- contrast：金黄 -->
+  <Style Selector="Button.contrast">
+    <Style.Resources>
+      <ImageBrush x:Key="Ore9TL" Source="avares://OreUI/Assets/Textures/btn_contrast_tl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9T" Source="avares://OreUI/Assets/Textures/btn_contrast_t.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9TR" Source="avares://OreUI/Assets/Textures/btn_contrast_tr.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9L" Source="avares://OreUI/Assets/Textures/btn_contrast_l.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9C" Source="avares://OreUI/Assets/Textures/btn_contrast_c.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9R" Source="avares://OreUI/Assets/Textures/btn_contrast_r.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BL" Source="avares://OreUI/Assets/Textures/btn_contrast_bl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9B" Source="avares://OreUI/Assets/Textures/btn_contrast_b.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BR" Source="avares://OreUI/Assets/Textures/btn_contrast_br.png" Stretch="Fill" />
+    </Style.Resources>
+    <Setter Property="Foreground" Value="#FFFFFF" />
+  </Style>
+
+  <!-- destructive：红 -->
+  <Style Selector="Button.destructive">
+    <Style.Resources>
+      <ImageBrush x:Key="Ore9TL" Source="avares://OreUI/Assets/Textures/btn_danger_tl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9T" Source="avares://OreUI/Assets/Textures/btn_danger_t.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9TR" Source="avares://OreUI/Assets/Textures/btn_danger_tr.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9L" Source="avares://OreUI/Assets/Textures/btn_danger_l.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9C" Source="avares://OreUI/Assets/Textures/btn_danger_c.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9R" Source="avares://OreUI/Assets/Textures/btn_danger_r.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BL" Source="avares://OreUI/Assets/Textures/btn_danger_bl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9B" Source="avares://OreUI/Assets/Textures/btn_danger_b.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BR" Source="avares://OreUI/Assets/Textures/btn_danger_br.png" Stretch="Fill" />
+    </Style.Resources>
+    <Setter Property="Foreground" Value="#FFFFFF" />
+  </Style>
+
+  <!-- realm：紫 -->
+  <Style Selector="Button.realm">
+    <Style.Resources>
+      <ImageBrush x:Key="Ore9TL" Source="avares://OreUI/Assets/Textures/btn_realm_tl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9T" Source="avares://OreUI/Assets/Textures/btn_realm_t.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9TR" Source="avares://OreUI/Assets/Textures/btn_realm_tr.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9L" Source="avares://OreUI/Assets/Textures/btn_realm_l.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9C" Source="avares://OreUI/Assets/Textures/btn_realm_c.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9R" Source="avares://OreUI/Assets/Textures/btn_realm_r.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BL" Source="avares://OreUI/Assets/Textures/btn_realm_bl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9B" Source="avares://OreUI/Assets/Textures/btn_realm_b.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BR" Source="avares://OreUI/Assets/Textures/btn_realm_br.png" Stretch="Fill" />
+    </Style.Resources>
+    <Setter Property="Foreground" Value="#FFFFFF" />
+  </Style>
+
+  <!-- transparent：透明底，hover 提亮 -->
+  <Style Selector="Button.transparent">
+    <Style.Resources>
+      <ImageBrush x:Key="Ore9TL" Source="avares://OreUI/Assets/Textures/btn_transparent_tl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9T" Source="avares://OreUI/Assets/Textures/btn_transparent_t.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9TR" Source="avares://OreUI/Assets/Textures/btn_transparent_tr.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9L" Source="avares://OreUI/Assets/Textures/btn_transparent_l.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9C" Source="avares://OreUI/Assets/Textures/btn_transparent_c.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9R" Source="avares://OreUI/Assets/Textures/btn_transparent_r.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BL" Source="avares://OreUI/Assets/Textures/btn_transparent_bl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9B" Source="avares://OreUI/Assets/Textures/btn_transparent_b.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BR" Source="avares://OreUI/Assets/Textures/btn_transparent_br.png" Stretch="Fill" />
+    </Style.Resources>
+    <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+  </Style>
+
+  <!-- disabled：统一灰纹理 -->
+  <Style Selector="Button:disabled">
+    <Style.Resources>
+      <ImageBrush x:Key="Ore9TL" Source="avares://OreUI/Assets/Textures/btn_disabled_tl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9T" Source="avares://OreUI/Assets/Textures/btn_disabled_t.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9TR" Source="avares://OreUI/Assets/Textures/btn_disabled_tr.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9L" Source="avares://OreUI/Assets/Textures/btn_disabled_l.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9C" Source="avares://OreUI/Assets/Textures/btn_disabled_c.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9R" Source="avares://OreUI/Assets/Textures/btn_disabled_r.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BL" Source="avares://OreUI/Assets/Textures/btn_disabled_bl.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9B" Source="avares://OreUI/Assets/Textures/btn_disabled_b.png" Stretch="Fill" />
+      <ImageBrush x:Key="Ore9BR" Source="avares://OreUI/Assets/Textures/btn_disabled_br.png" Stretch="Fill" />
+    </Style.Resources>
+    <Setter Property="Foreground" Value="{DynamicResource OreTextDisabledBrush}" />
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
+</Styles>

@@ -1,0 +1,69 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- OreUI TextBox：深色 field 9-slice 纹理，focus 绿色内框 -->
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type TextBox}" TargetType="TextBox">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+      <Setter Property="CaretBrush" Value="{DynamicResource OreAccentHighlightBrush}" />
+      <Setter Property="SelectionBrush" Value="{DynamicResource OreAccentBrush}" />
+      <Setter Property="Padding" Value="10,7" />
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamilyBody}" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="TextBox">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="4" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="4" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="4" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="4" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource OreField9TL}" />
+            <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource OreField9T}" />
+            <Border Grid.Row="0" Grid.Column="2" Background="{DynamicResource OreField9TR}" />
+            <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource OreField9L}" />
+            <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource OreField9C}" />
+            <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource OreField9R}" />
+            <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource OreField9BL}" />
+            <Border Grid.Row="2" Grid.Column="1" Background="{DynamicResource OreField9B}" />
+            <Border Grid.Row="2" Grid.Column="2" Background="{DynamicResource OreField9BR}" />
+
+            <Border x:Name="PART_FocusRing" Grid.Row="1" Grid.Column="1"
+                    BorderBrush="{DynamicResource OreAccentBrush}" BorderThickness="1"
+                    IsVisible="False" Margin="-1" />
+
+            <ScrollViewer Grid.Row="1" Grid.Column="1"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Disabled"
+                          Margin="{TemplateBinding Padding}">
+              <TextPresenter Name="PART_TextPresenter" Text="{TemplateBinding Text}" />
+            </ScrollViewer>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+
+      <Style Selector="^:focus /template/ Border#PART_FocusRing">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.45" />
+      </Style>
+    </ControlTheme>
+
+    <ImageBrush x:Key="OreField9TL" Source="avares://OreUI/Assets/Textures/field_tl.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9T" Source="avares://OreUI/Assets/Textures/field_t.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9TR" Source="avares://OreUI/Assets/Textures/field_tr.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9L" Source="avares://OreUI/Assets/Textures/field_l.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9C" Source="avares://OreUI/Assets/Textures/field_c.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9R" Source="avares://OreUI/Assets/Textures/field_r.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9BL" Source="avares://OreUI/Assets/Textures/field_bl.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9B" Source="avares://OreUI/Assets/Textures/field_b.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreField9BR" Source="avares://OreUI/Assets/Textures/field_br.png" Stretch="Fill" />
+  </Styles.Resources>
+
+</Styles>

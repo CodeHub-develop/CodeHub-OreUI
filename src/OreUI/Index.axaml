@@ -1,0 +1,36 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- ============ 资源合并（颜色 / 尺寸 / 字体 / 纹理） ============ -->
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://OreUI/Resources/Constants.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <!-- ============ 全局字体：所有控件与文本默认使用 Minecraft 像素字体 ============ -->
+  <Style Selector=":is(TemplatedControl)">
+    <Setter Property="FontFamily" Value="{DynamicResource OreFontFamilyBody}" />
+  </Style>
+  <Style Selector="TextBlock">
+    <Setter Property="FontFamily" Value="{DynamicResource OreFontFamilyBody}" />
+  </Style>
+
+  <!-- ============ 每控件一个样式文件（ControlTheme x:Key="{x:Type ...}" 全局生效） ============ -->
+  <StyleInclude Source="avares://OreUI/Styles/Button.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/ToggleSwitch.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/CheckBox.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/RadioButton.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/Slider.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/TextBox.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/ComboBox.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/TabControl.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/ProgressBar.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/ListBox.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/ScrollBar.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/ToolTip.axaml" />
+  <StyleInclude Source="avares://OreUI/Styles/Window.axaml" />
+
+</Styles>

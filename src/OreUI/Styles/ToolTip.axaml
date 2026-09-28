@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- OreUI ToolTip：panel 像素纹理 + 白字 -->
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamilyBody}" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Padding" Value="8,5" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="ToolTip">
+          <Border Padding="{TemplateBinding Padding}" BorderBrush="#0A0A0A" BorderThickness="1">
+            <Border.Background>
+              <ImageBrush Source="avares://OreUI/Assets/Textures/panel_raised.png" Stretch="Fill" />
+            </Border.Background>
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              Foreground="{TemplateBinding Foreground}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+  </Styles.Resources>
+
+</Styles>

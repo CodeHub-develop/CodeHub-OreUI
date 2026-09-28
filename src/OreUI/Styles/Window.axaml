@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- OreUI Window：深色像素背景（与设置页截图一致） -->
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://OreUI/Resources/Constants.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <Style Selector="Window">
+    <Setter Property="Background" Value="{DynamicResource OreBgBaseBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+    <Setter Property="FontFamily" Value="{DynamicResource OreFontFamilyBody}" />
+  </Style>
+
+</Styles>

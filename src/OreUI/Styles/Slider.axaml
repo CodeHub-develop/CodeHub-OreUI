@@ -1,0 +1,66 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    OreUI Slider
+    官方：track 6px + 16px 像素方块拇指；progress 绿纹理 / 剩余深灰纹理。
+  -->
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type Slider}" TargetType="Slider">
+      <Setter Property="Template">
+        <ControlTemplate TargetType="Slider">
+          <Grid RowDefinitions="Auto,Auto,Auto">
+            <Track Grid.Row="1" Name="PART_Track"
+                   Minimum="{TemplateBinding Minimum}"
+                   Maximum="{TemplateBinding Maximum}"
+                   Value="{TemplateBinding Value}"
+                   Orientation="{TemplateBinding Orientation}">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_DecreaseButton" Focusable="False">
+                  <RepeatButton.Template>
+                    <ControlTemplate TargetType="RepeatButton">
+                      <Border Height="{DynamicResource OreTrackHeight}">
+                        <Border.Background>
+                          <ImageBrush Source="avares://OreUI/Assets/Textures/progress.png" Stretch="Fill" />
+                        </Border.Background>
+                      </Border>
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_IncreaseButton" Focusable="False">
+                  <RepeatButton.Template>
+                    <ControlTemplate TargetType="RepeatButton">
+                      <Border Height="{DynamicResource OreTrackHeight}">
+                        <Border.Background>
+                          <ImageBrush Source="avares://OreUI/Assets/Textures/track.png" Stretch="Fill" />
+                        </Border.Background>
+                      </Border>
+                    </ControlTemplate>
+                  </RepeatButton.Template>
+                </RepeatButton>
+              </Track.IncreaseButton>
+              <Thumb Name="PART_Thumb" Width="{DynamicResource OreThumbSize}"
+                     Height="{DynamicResource OreThumbSize}">
+                <Thumb.Template>
+                  <ControlTemplate TargetType="Thumb">
+                    <Border>
+                      <Border.Background>
+                        <ImageBrush Source="avares://OreUI/Assets/Textures/thumb.png" Stretch="Fill" />
+                      </Border.Background>
+                    </Border>
+                  </ControlTemplate>
+                </Thumb.Template>
+              </Thumb>
+            </Track>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.45" />
+      </Style>
+    </ControlTheme>
+  </Styles.Resources>
+
+</Styles>

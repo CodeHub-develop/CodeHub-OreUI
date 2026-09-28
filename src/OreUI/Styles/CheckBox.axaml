@@ -1,0 +1,44 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- OreUI CheckBox：官方 12px 方框，checked 绿色像素填充 -->
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type CheckBox}" TargetType="CheckBox">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamily}" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="CheckBox">
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+            <Grid Grid.Column="0" Width="{DynamicResource OreCheckSize}"
+                  Height="{DynamicResource OreCheckSize}" VerticalAlignment="Center">
+              <Border x:Name="PART_Box" Background="#0F0F0F"
+                      BorderBrush="{DynamicResource OreBorderStrongBrush}" BorderThickness="1" />
+              <Path x:Name="PART_Check" Data="M1,6 L5,10 L11,2"
+                    Stroke="#FFFFFF" StrokeThickness="2" StrokeLineCap="Square"
+                    IsVisible="False" />
+            </Grid>
+            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}"
+                              VerticalAlignment="Center"
+                              Foreground="{TemplateBinding Foreground}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+
+      <Style Selector="^:checked /template/ Border#PART_Box">
+        <Setter Property="Background" Value="{DynamicResource OreAccentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource OreAccentFrameBrush}" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#PART_Check">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#PART_Box">
+        <Setter Property="BorderBrush" Value="{DynamicResource OreAccentHighlightBrush}" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.45" />
+      </Style>
+    </ControlTheme>
+  </Styles.Resources>
+
+</Styles>

@@ -1,123 +1,428 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ore="clr-namespace:OreUI.Controls;assembly=OreUI"
         x:Class="OreUI.Sample.MainWindow"
-        Title="OreUI Demo"
-        Width="920" Height="700"
-        Background="{DynamicResource OreBgBaseBrush}"
-        Foreground="{DynamicResource OreTextBrush}">
+        Title="OreUI Demo — Minecraft Bedrock 风格设置页"
+        Width="1080" Height="760">
 
-  <Grid>
-    <ScrollViewer Padding="20">
-      <StackPanel Spacing="16" MaxWidth="780" HorizontalAlignment="Left">
+  <Window.Styles>
+    <!-- 分组标题 -->
+    <Style Selector="TextBlock.ore-nav-group">
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{DynamicResource OreTextMutedBrush}" />
+      <Setter Property="Margin" Value="12,12,12,4" />
+    </Style>
+    <Style Selector="TextBlock.ore-section-title">
+      <Setter Property="FontSize" Value="18" />
+      <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="TextBlock.ore-section-sub">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Foreground" Value="{DynamicResource OreTextMutedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.ore-field-label">
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.ore-value">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Foreground" Value="{DynamicResource OreTextSuccessBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="MinWidth" Value="90" />
+    </Style>
 
-        <ore:OreHeader Title="设置" ShowBack="True" ShowClose="True" />
+    <!-- 左导航行 -->
+    <Style Selector="Button.ore-nav">
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamily}" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Padding" Value="10,5" />
+      <Setter Property="Margin" Value="0,1" />
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+    </Style>
+    <Style Selector="Button.ore-nav.selected">
+      <Setter Property="Background" Value="{DynamicResource OreAccentBrush}" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
 
-        <ore:OrePanel>
-          <StackPanel Spacing="12">
-            <TextBlock Text="按钮 Button" FontWeight="SemiBold" />
-            <StackPanel Orientation="Horizontal" Spacing="8">
-              <Button Classes="ore hero" Content="Hero" />
-              <Button Classes="ore primary" Content="Primary" />
-              <Button Classes="ore secondary" Content="Secondary" />
-              <Button Classes="ore destructive" Content="Destructive" />
-              <Button Classes="ore" Content="Default" />
-              <Button Classes="ore" Content="Disabled" IsEnabled="False" />
-            </StackPanel>
-          </StackPanel>
-        </ore:OrePanel>
+    <!-- 难度分段按钮 -->
+    <Style Selector="RadioButton.ore-seg">
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamily}" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Padding" Value="10,5" />
+      <Setter Property="Foreground" Value="{DynamicResource OreTextMutedBrush}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="{DynamicResource OreBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="RadioButton">
+          <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  Padding="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                              Foreground="{TemplateBinding Foreground}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="RadioButton.ore-seg:pointerover">
+      <Setter Property="Background" Value="{DynamicResource OreSurfaceHoverBrush}" />
+    </Style>
+    <Style Selector="RadioButton.ore-seg:checked">
+      <Setter Property="Background" Value="{DynamicResource OreAccentBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource OreAccentFrameBrush}" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
 
-        <ore:OreDivider Classes="horizontal" />
+    <!-- 面板卡（panel 纹理） -->
+    <Style Selector="Border.ore-card">
+      <Setter Property="BorderBrush" Value="#0A0A0A" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="16" />
+    </Style>
+  </Window.Styles>
 
-        <ore:OrePanel>
-          <StackPanel Spacing="12">
-            <TextBlock Text="开关 / 选择 Toggle · CheckBox · Radio" FontWeight="SemiBold" />
-              <StackPanel Orientation="Horizontal" Spacing="24">
-                <ToggleSwitch Classes="ore" Content="启用" IsChecked="True" VerticalAlignment="Center" />
-                <ToggleSwitch Classes="ore" Content="关闭" VerticalAlignment="Center" />
-                <CheckBox Classes="ore" Content="记住我" IsChecked="True" VerticalAlignment="Center" />
-                <CheckBox Classes="ore" Content="订阅更新" VerticalAlignment="Center" />
-              </StackPanel>
-              <StackPanel Orientation="Horizontal" Spacing="16">
-                <RadioButton Classes="ore" Content="低" GroupName="quality" IsChecked="True" VerticalAlignment="Center" />
-                <RadioButton Classes="ore" Content="中" GroupName="quality" VerticalAlignment="Center" />
-                <RadioButton Classes="ore" Content="高" GroupName="quality" VerticalAlignment="Center" />
-              </StackPanel>
-          </StackPanel>
-        </ore:OrePanel>
+  <Grid RowDefinitions="Auto,*">
 
-        <ore:OrePanel>
-          <StackPanel Spacing="12">
-            <TextBlock Text="滑块 / 输入框 / 下拉 Slider · TextBox · Dropdown" FontWeight="SemiBold" />
-            <Slider Classes="ore" Width="340" Minimum="0" Maximum="100" Value="60" />
-            <TextBox Classes="ore" Width="340" PlaceholderText="输入世界名称..." />
-            <TextBox Classes="ore" Width="340" PasswordChar="*" Text="secret" />
-            <ComboBox Classes="ore" Width="340" SelectedIndex="0">
-              <ComboBoxItem>快速（Fast）</ComboBoxItem>
-              <ComboBoxItem>普通（Fancy）</ComboBoxItem>
-              <ComboBoxItem>自定义（Custom）</ComboBoxItem>
-            </ComboBox>
-          </StackPanel>
-        </ore:OrePanel>
-
-        <ore:OrePanel>
-          <StackPanel Spacing="12">
-            <TextBlock Text="标签 / 加载 / 进度 Tag · Spinner · ProgressBar" FontWeight="SemiBold" />
-            <StackPanel Orientation="Horizontal" Spacing="8">
-              <ore:OreTag Content="默认" />
-              <ore:OreTag TagVariant="Success" Content="成功" />
-              <ore:OreTag TagVariant="Danger" Content="危险" />
-              <ore:OreTag TagVariant="Warning" Content="警告" />
-              <ore:OreTag TagVariant="Info" Content="信息" />
-              <ore:OreSpinner />
-            </StackPanel>
-            <ProgressBar Classes="ore" Width="340" Value="40" Maximum="100" />
-          </StackPanel>
-        </ore:OrePanel>
-
-        <ore:OrePanel>
-          <StackPanel Spacing="8">
-            <TextBlock Text="选择列表 SelectionList" FontWeight="SemiBold" />
-            <ore:OreSelectionList Height="168">
-              <ore:OreMenuRow Content="游戏设置" Subtitle="画面、音频与控制器" />
-              <ore:OreMenuRow Content="账户" Subtitle="登录与隐私" />
-              <ore:OreMenuRow Content="关于" Subtitle="版本 v1.0.0" />
-            </ore:OreSelectionList>
-          </StackPanel>
-        </ore:OrePanel>
-
-        <ore:OrePanel>
-          <StackPanel Spacing="8">
-            <TextBlock Text="标签页 Tabs" FontWeight="SemiBold" />
-            <TabControl Classes="ore" Height="120">
-              <TabItem Header="常规">
-                <TextBlock Text="常规设置内容" Margin="8" />
-              </TabItem>
-              <TabItem Header="高级">
-                <TextBlock Text="高级设置内容" Margin="8" />
-              </TabItem>
-              <TabItem Header="关于">
-                <TextBlock Text="关于内容" Margin="8" />
-              </TabItem>
-            </TabControl>
-          </StackPanel>
-        </ore:OrePanel>
-
-        <Button Classes="ore primary" Content="打开模态 Modal" Click="OpenModal" HorizontalAlignment="Left" />
-
-      </StackPanel>
-    </ScrollViewer>
-
-    <ore:OreModal x:Name="DemoModal" IsOpen="False">
-      <StackPanel Spacing="12" Width="320">
-        <TextBlock Text="确认操作?" FontWeight="SemiBold" FontSize="16" />
-        <TextBlock Text="此操作将应用到当前实例。" Foreground="{DynamicResource OreTextMutedBrush}" />
-        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
-          <Button Classes="ore secondary" Content="取消" Click="CloseModal" />
-          <Button Classes="ore primary" Content="确定" Click="CloseModal" />
+    <!-- ================= 顶部 Header（返回 + 标题 + 面包屑） ================= -->
+    <Border Grid.Row="0" Padding="10,7" BorderBrush="#0A0A0A" BorderThickness="0,0,0,1">
+      <Border.Background>
+        <ImageBrush Source="avares://OreUI/Assets/Textures/panel.png" Stretch="Fill" />
+      </Border.Background>
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <Button Content="◀" Classes="transparent" FontSize="14" Width="30" Height="26"
+                ToolTip.Tip="返回" />
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8"
+                    VerticalAlignment="Center" Margin="8,0,0,0">
+          <TextBlock Text="设置" FontSize="16" FontWeight="Bold" />
+          <TextBlock Text="›" Foreground="{DynamicResource OreTextMutedBrush}" VerticalAlignment="Center" />
+          <TextBlock x:Name="HeaderCrumb" Text="世界" FontSize="14"
+                     Foreground="{DynamicResource OreTextMutedBrush}" VerticalAlignment="Center" />
         </StackPanel>
-      </StackPanel>
-    </ore:OreModal>
-  </Grid>
+      </Grid>
+    </Border>
 
+    <Grid Grid.Row="1" ColumnDefinitions="252,*" Margin="14">
+
+      <!-- ================= 左侧：分类导航 ================= -->
+      <Border Grid.Column="0" BorderBrush="#0A0A0A" BorderThickness="1" Padding="6">
+        <Border.Background>
+          <ImageBrush Source="avares://OreUI/Assets/Textures/panel.png" Stretch="Fill" />
+        </Border.Background>
+        <ScrollViewer>
+          <StackPanel>
+            <TextBlock Classes="ore-nav-group" Text="设置" />
+            <Button x:Name="NavAccessibility" Classes="ore-nav" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="🔑" FontSize="14" />
+                <TextBlock Text="辅助功能" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="NavHowToPlay" Classes="ore-nav" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="❓" FontSize="14" />
+                <TextBlock Text="操作指南" />
+              </StackPanel>
+            </Button>
+
+            <TextBlock Classes="ore-nav-group" Text="世界" />
+            <Button x:Name="NavGame" Classes="ore-nav selected" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="🎮" FontSize="14" />
+                <TextBlock Text="游戏" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="NavMultiplayer" Classes="ore-nav" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="👥" FontSize="14" />
+                <TextBlock Text="多人游戏" />
+              </StackPanel>
+            </Button>
+
+            <TextBlock Classes="ore-nav-group" Text="控制" />
+            <Button x:Name="NavKeyboard" Classes="ore-nav" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8" Margin="10,0,0,0">
+                <TextBlock Text="⌨️" FontSize="14" />
+                <TextBlock Text="键盘与鼠标" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="NavController" Classes="ore-nav" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8" Margin="10,0,0,0">
+                <TextBlock Text="🕹️" FontSize="14" />
+                <TextBlock Text="控制器" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="NavTouch" Classes="ore-nav" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8" Margin="10,0,0,0">
+                <TextBlock Text="✋" FontSize="14" />
+                <TextBlock Text="触控" />
+              </StackPanel>
+            </Button>
+
+            <TextBlock Classes="ore-nav-group" Text="通用" />
+            <Button x:Name="NavProfile" Classes="ore-nav" Click="NavRow_Click">
+              <StackPanel Orientation="Horizontal" Spacing="8" Margin="10,0,0,0">
+                <TextBlock Text="🧑" FontSize="14" />
+                <TextBlock Text="个人资料" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </ScrollViewer>
+      </Border>
+
+      <!-- ================= 右侧：设置面板 ================= -->
+      <ScrollViewer Grid.Column="1">
+        <StackPanel Spacing="14" Margin="16,2,4,16">
+
+          <StackPanel Spacing="2">
+            <TextBlock x:Name="SectionTitle" Classes="ore-section-title" Text="世界设置" />
+            <TextBlock Classes="ore-section-sub" Text="调整当前世界的行为与规则" />
+          </StackPanel>
+
+          <!-- 世界设置 -->
+          <Border Classes="ore-card">
+            <Border.Background>
+              <ImageBrush Source="avares://OreUI/Assets/Textures/panel_raised.png" Stretch="Fill" />
+            </Border.Background>
+            <StackPanel Spacing="12">
+
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="奖励宝箱" />
+                <ToggleSwitch Grid.Column="1" IsChecked="True" />
+              </Grid>
+
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="世界类型" />
+                <ComboBox Grid.Column="1" Width="230" SelectedIndex="0">
+                  <ComboBoxItem>无限（Infinite）</ComboBoxItem>
+                  <ComboBoxItem>有限（Finite）</ComboBoxItem>
+                  <ComboBoxItem>平坦（Flat）</ComboBoxItem>
+                </ComboBox>
+              </Grid>
+
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="种子" />
+                <TextBox Grid.Column="1" Width="230" PlaceholderText="输入世界种子..."
+                         Text="569732829587979657" />
+              </Grid>
+
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="渲染距离" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+                  <Slider Width="180" Minimum="4" Maximum="32" Value="12"
+                          ValueChanged="RenderDistance_Changed" />
+                  <TextBlock x:Name="RenderDistanceText" Classes="ore-value" Text="12 chunks" />
+                </StackPanel>
+              </Grid>
+
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="模拟距离" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+                  <Slider Width="180" Minimum="4" Maximum="12" Value="8"
+                          ValueChanged="SimulationDistance_Changed" />
+                  <TextBlock x:Name="SimulationDistanceText" Classes="ore-value" Text="8 chunks" />
+                </StackPanel>
+              </Grid>
+
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="难度" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4">
+                  <RadioButton Classes="ore-seg" Content="和平" GroupName="difficulty" />
+                  <RadioButton Classes="ore-seg" Content="简单" GroupName="difficulty" />
+                  <RadioButton Classes="ore-seg" Content="普通" GroupName="difficulty" IsChecked="True" />
+                  <RadioButton Classes="ore-seg" Content="困难" GroupName="difficulty" />
+                </StackPanel>
+              </Grid>
+
+            </StackPanel>
+          </Border>
+
+          <!-- 世界选项 -->
+          <Border Classes="ore-card">
+            <Border.Background>
+              <ImageBrush Source="avares://OreUI/Assets/Textures/panel_raised.png" Stretch="Fill" />
+            </Border.Background>
+            <StackPanel Spacing="12">
+              <TextBlock Classes="ore-section-title" FontSize="15" Text="世界选项" />
+
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="好友伤害" />
+                <ToggleSwitch Grid.Column="1" />
+              </Grid>
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="显示坐标" />
+                <ToggleSwitch Grid.Column="1" IsChecked="True" />
+              </Grid>
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="火焰蔓延" />
+                <ToggleSwitch Grid.Column="1" IsChecked="True" />
+              </Grid>
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="ore-field-label" Text="TNT 爆炸" />
+                <ToggleSwitch Grid.Column="1" IsChecked="True" />
+              </Grid>
+
+              <Border Height="1" Background="{DynamicResource OreBorderBrush}" Margin="0,4" />
+
+              <TabControl Height="140">
+                <TabItem Header="常规">
+                  <StackPanel Margin="12,10" Spacing="6">
+                    <CheckBox Content="启用实验性玩法" IsChecked="True" />
+                    <CheckBox Content="洞穴生成" />
+                    <RadioButton Content="先开启局域网" GroupName="lan" IsChecked="True" />
+                    <RadioButton Content="仅主机" GroupName="lan" />
+                  </StackPanel>
+                </TabItem>
+                <TabItem Header="高级">
+                  <StackPanel Margin="12,10" Spacing="6">
+                    <TextBlock FontSize="12" Foreground="{DynamicResource OreTextMutedBrush}"
+                               Text="内容日志、脚本引擎与作弊开关。" />
+                    <ToggleSwitch Content="允许作弊" />
+                    <ToggleSwitch Content="启用内容日志" />
+                  </StackPanel>
+                </TabItem>
+                <TabItem Header="关于">
+                  <StackPanel Margin="12,10" Spacing="8">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                      <Border Background="{DynamicResource OreAccentBrush}" Padding="6,2">
+                        <TextBlock Text="OreUI" FontSize="11" Foreground="#FFFFFF" />
+                      </Border>
+                      <Border Background="{DynamicResource OreBorderStrongBrush}" Padding="6,2">
+                        <TextBlock Text="Avalonia 12" FontSize="11" Foreground="#FFFFFF" />
+                      </Border>
+                      <Border Background="{DynamicResource OreContrastBrush}" Padding="6,2">
+                        <TextBlock Text="v1.0.0" FontSize="11" Foreground="#161616" />
+                      </Border>
+                      <Border Background="{DynamicResource OreDestructiveBrush}" Padding="6,2">
+                        <TextBlock Text="实验性" FontSize="11" Foreground="#FFFFFF" />
+                      </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                      <ProgressBar Width="220" Value="62" Maximum="100" />
+                      <Border Width="16" Height="16" CornerRadius="8">
+                        <Border.Background>
+                          <ImageBrush Source="avares://OreUI/Assets/Textures/thumb.png" Stretch="Fill" />
+                        </Border.Background>
+                      </Border>
+                    </StackPanel>
+                  </StackPanel>
+                </TabItem>
+              </TabControl>
+
+            </StackPanel>
+          </Border>
+
+          <!-- 物品栏 -->
+          <Border Classes="ore-card">
+            <Border.Background>
+              <ImageBrush Source="avares://OreUI/Assets/Textures/panel_raised.png" Stretch="Fill" />
+            </Border.Background>
+            <StackPanel Spacing="10">
+              <TextBlock Classes="ore-section-title" FontSize="15" Text="物品栏（ItemSlot）" />
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="💎" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="⚔️" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="🍎" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="💣" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="🛡️" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="⛏️" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="🧱" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border Width="44" Height="44" BorderBrush="#0A0A0A" BorderThickness="1">
+                  <Border.Background>
+                    <ImageBrush Source="avares://OreUI/Assets/Textures/slot.png" Stretch="Fill" />
+                  </Border.Background>
+                  <TextBlock Text="👾" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <!-- 操作按钮（官方 7 变体） -->
+          <Border Classes="ore-card">
+            <Border.Background>
+              <ImageBrush Source="avares://OreUI/Assets/Textures/panel_raised.png" Stretch="Fill" />
+            </Border.Background>
+            <StackPanel Spacing="10">
+              <TextBlock Classes="ore-section-title" FontSize="15" Text="操作（Button Variants）" />
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Classes="hero" Content="开始游戏" />
+                <Button Classes="primary" Content="Primary" />
+                <Button Classes="secondary" Content="Secondary" />
+                <Button Classes="contrast" Content="Contrast" />
+                <Button Classes="destructive" Content="删除世界" />
+                <Button Classes="realm" Content="Realm" />
+                <Button Classes="transparent" Content="Transparent" />
+              </StackPanel>
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Content="默认按钮" />
+                <Button Content="不可用" IsEnabled="False" />
+                <Button Classes="primary" Content="打开模态" Click="OpenModal" />
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+        </StackPanel>
+      </ScrollViewer>
+    </Grid>
+
+    <!-- ================= 模态 ================= -->
+    <Border x:Name="ModalOverlay" Grid.Row="0" Grid.RowSpan="2"
+            Background="#B3000000" IsVisible="False"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+      <Border Width="360" Padding="16" BorderBrush="#0A0A0A" BorderThickness="1"
+              HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Border.Background>
+          <ImageBrush Source="avares://OreUI/Assets/Textures/panel_raised.png" Stretch="Fill" />
+        </Border.Background>
+        <StackPanel Spacing="12">
+          <TextBlock FontSize="16" FontWeight="Bold" Text="确认操作?" />
+          <TextBlock Foreground="{DynamicResource OreTextMutedBrush}"
+                     Text="此操作将应用到当前世界，且无法撤销。" />
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+            <Button Classes="secondary" Content="取消" Click="CloseModal" />
+            <Button Classes="primary" Content="确定" Click="CloseModal" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </Border>
+
+  </Grid>
 </Window>

@@ -1,0 +1,30 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- OreUI ProgressBar：绿色像素进度条（官方 track 6px） -->
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type ProgressBar}" TargetType="ProgressBar">
+      <Setter Property="Height" Value="6" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="ProgressBar">
+          <Grid>
+            <Border>
+              <Border.Background>
+                <ImageBrush Source="avares://OreUI/Assets/Textures/track.png" Stretch="Fill" />
+              </Border.Background>
+            </Border>
+            <Border x:Name="PART_Indicator" HorizontalAlignment="Left">
+              <Border.Background>
+                <ImageBrush Source="avares://OreUI/Assets/Textures/progress.png" Stretch="Fill" />
+              </Border.Background>
+            </Border>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.45" />
+      </Style>
+    </ControlTheme>
+  </Styles.Resources>
+
+</Styles>

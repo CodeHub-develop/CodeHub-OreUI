@@ -5,8 +5,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <!-- 本机构建环境 MSBuild 在 XAML 预编译阶段高概率段错误，禁用预编译改运行时解析 -->
+    <EnableAvaloniaXamlCompilation>false</EnableAvaloniaXamlCompilation>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>CodeHub-OreUI</PackageId>
+    <Version>1.1.0</Version>
     <Title>CodeHub-OreUI</Title>
     <Description>OreUI — Minecraft Bedrock Edition 风格的 Avalonia 控件库（面板 / 按钮 / 开关 / 滑块 / 下拉 / 列表 / 标签页 / 模态 等）。</Description>
     <PackageTags>avalonia;minecraft;bedrock;oreui;ui-controls</PackageTags>
@@ -21,10 +24,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>First release: Minecraft Bedrock (OreUI) style controls for Avalonia 12.</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.1.0 — faithful OreUI rebuild: button/panel/tab textures regenerated to match real Bedrock OreUI CSS (solid fill + bottom 2px bevel + corner highlights, no border/gradient); exact wiki colors for primary/destructive/realms/tab/disabled; aligned design tokens.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <AvaloniaResource Include="Assets/**" />
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 

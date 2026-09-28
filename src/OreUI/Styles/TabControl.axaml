@@ -1,0 +1,133 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--
+    OreUI TabControl / TabItem
+    官方 tabs：27px 方块标签，未选中深灰 / 选中基岩绿（selectedDrop：选中文字下移 1px）。
+  -->
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type TabItem}" TargetType="TabItem">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextMutedBrush}" />
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamily}" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Padding" Value="14,4" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="TabItem">
+          <Grid Height="{DynamicResource OreControlHeight}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="4" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="4" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="4" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="4" />
+            </Grid.ColumnDefinitions>
+
+            <!-- 未选中纹理 -->
+            <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource OreTab9TL}" />
+            <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource OreTab9T}" />
+            <Border Grid.Row="0" Grid.Column="2" Background="{DynamicResource OreTab9TR}" />
+            <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource OreTab9L}" />
+            <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource OreTab9C}" />
+            <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource OreTab9R}" />
+            <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource OreTab9BL}" />
+            <Border Grid.Row="2" Grid.Column="1" Background="{DynamicResource OreTab9B}" />
+            <Border Grid.Row="2" Grid.Column="2" Background="{DynamicResource OreTab9BR}" />
+
+            <!-- 选中纹理（覆盖） -->
+            <Grid x:Name="PART_SelectedFace" IsVisible="False"
+                  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="4" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4" />
+              </Grid.ColumnDefinitions>
+              <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource OreTabSel9TL}" />
+              <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource OreTabSel9T}" />
+              <Border Grid.Row="0" Grid.Column="2" Background="{DynamicResource OreTabSel9TR}" />
+              <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource OreTabSel9L}" />
+              <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource OreTabSel9C}" />
+              <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource OreTabSel9R}" />
+              <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource OreTabSel9BL}" />
+              <Border Grid.Row="2" Grid.Column="1" Background="{DynamicResource OreTabSel9B}" />
+              <Border Grid.Row="2" Grid.Column="2" Background="{DynamicResource OreTabSel9BR}" />
+            </Grid>
+
+            <ContentPresenter x:Name="PART_Label" Grid.Row="1" Grid.Column="1"
+                              Content="{TemplateBinding Header}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center"
+                              Foreground="{TemplateBinding Foreground}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+
+      <Style Selector="^:selected /template/ Grid#PART_SelectedFace">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:selected /template/ ContentPresenter#PART_Label">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="RenderTransform" Value="translateY(1px)" />
+      </Style>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type TabControl}" TargetType="TabControl">
+      <Setter Property="ItemContainerTheme" Value="{StaticResource {x:Type TabItem}}" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="TabControl">
+          <DockPanel>
+            <Border DockPanel.Dock="Top" BorderBrush="{DynamicResource OreBorderBrush}"
+                    BorderThickness="0,0,0,1">
+              <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Disabled">
+                <ItemsPresenter Name="PART_ItemsPresenter">
+                  <ItemsPresenter.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                  </ItemsPresenter.ItemsPanel>
+                </ItemsPresenter>
+              </ScrollViewer>
+            </Border>
+            <Border>
+              <Border.Background>
+                <ImageBrush Source="avares://OreUI/Assets/Textures/panel.png" Stretch="Fill" />
+              </Border.Background>
+              <ContentPresenter Name="PART_SelectedContentHost"
+                                Content="{TemplateBinding SelectedContent}" />
+            </Border>
+          </DockPanel>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+
+    <ImageBrush x:Key="OreTab9TL" Source="avares://OreUI/Assets/Textures/tab_normal_tl.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9T" Source="avares://OreUI/Assets/Textures/tab_normal_t.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9TR" Source="avares://OreUI/Assets/Textures/tab_normal_tr.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9L" Source="avares://OreUI/Assets/Textures/tab_normal_l.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9C" Source="avares://OreUI/Assets/Textures/tab_normal_c.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9R" Source="avares://OreUI/Assets/Textures/tab_normal_r.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9BL" Source="avares://OreUI/Assets/Textures/tab_normal_bl.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9B" Source="avares://OreUI/Assets/Textures/tab_normal_b.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTab9BR" Source="avares://OreUI/Assets/Textures/tab_normal_br.png" Stretch="Fill" />
+
+    <ImageBrush x:Key="OreTabSel9TL" Source="avares://OreUI/Assets/Textures/tab_selected_tl.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9T" Source="avares://OreUI/Assets/Textures/tab_selected_t.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9TR" Source="avares://OreUI/Assets/Textures/tab_selected_tr.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9L" Source="avares://OreUI/Assets/Textures/tab_selected_l.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9C" Source="avares://OreUI/Assets/Textures/tab_selected_c.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9R" Source="avares://OreUI/Assets/Textures/tab_selected_r.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9BL" Source="avares://OreUI/Assets/Textures/tab_selected_bl.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9B" Source="avares://OreUI/Assets/Textures/tab_selected_b.png" Stretch="Fill" />
+    <ImageBrush x:Key="OreTabSel9BR" Source="avares://OreUI/Assets/Textures/tab_selected_br.png" Stretch="Fill" />
+  </Styles.Resources>
+
+</Styles>

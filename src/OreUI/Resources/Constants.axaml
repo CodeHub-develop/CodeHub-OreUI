@@ -1,0 +1,192 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- =====================================================================
+       OreUI — 设计 Token（依据 Minecraft Bedrock Edition 官方 OreUI 设定）
+       字体色遵循 Minecraft 格式码：§f 白 / §7 浅灰 / §8 深灰 / §c 红 / §a 绿
+       间距遵循官方 spacing：xs2 / sm4 / md8 / lg12 / xl16
+       ===================================================================== -->
+
+  <!-- ============ 表面 / 背景 ============ -->
+  <Color x:Key="OreBgBase">#101010</Color>          <!-- 最底层背景 -->
+  <Color x:Key="OrePanel">#1C1C1C</Color>           <!-- 面板 Card -->
+  <Color x:Key="OrePanelAlt">#252525</Color>        <!-- 嵌套 / 子面板 / 输入框底 -->
+  <Color x:Key="OreSurfaceHover">#3A3A3A</Color>    <!-- 悬停表面 -->
+  <Color x:Key="OreSurfacePressed">#2C2C2C</Color>  <!-- 按下表面 -->
+  <Color x:Key="OreSurfaceSelected">#3E5C2A</Color> <!-- 选中项（暗绿高亮） -->
+  <Color x:Key="OreBorder">#404040</Color>          <!-- 常规边框 -->
+  <Color x:Key="OreBorderStrong">#4C4C4C</Color>    <!-- 强调边框 -->
+  <Color x:Key="OreOverlay">#B3000000</Color>       <!-- 模态遮罩 -->
+
+  <!-- ============ 文字（Minecraft 格式码色） ============ -->
+  <Color x:Key="OreText">#FFFFFF</Color>            <!-- §f 白 -->
+  <Color x:Key="OreTextMuted">#AAAAAA</Color>       <!-- §7 浅灰 -->
+  <Color x:Key="OreTextDisabled">#555555</Color>    <!-- §8 深灰 -->
+  <Color x:Key="OreTextDanger">#FF5555</Color>      <!-- §c 红 -->
+  <Color x:Key="OreTextSuccess">#55FF55</Color>     <!-- §a 绿 -->
+
+  <!-- ============ Primary / Hero（基岩绿） ============ -->
+  <Color x:Key="OreAccent">#3C8527</Color>          <!-- 主体（基岩绿，wiki 精确值 #3C8527） -->
+  <Color x:Key="OreAccentHover">#2B641C</Color>     <!-- 悬停 #2B641C -->
+  <Color x:Key="OreAccentPressed">#1D4C14</Color>   <!-- 按下 #1D4C14 -->
+  <Color x:Key="OreAccentHighlight">#8BC34A</Color> <!-- 顶部亮线 -->
+  <Color x:Key="OreAccentFrame">#23401A</Color>     <!-- 外框深边 -->
+
+  <!-- ============ Secondary（浅灰，黑字，wiki 对齐 #D9D9D9） ============ -->
+  <Color x:Key="OreSecondary">#D9D9D9</Color>
+  <Color x:Key="OreSecondaryHover">#EDEDED</Color>
+  <Color x:Key="OreSecondaryPressed">#B5B5B5</Color>
+  <Color x:Key="OreSecondaryHighlight">#FFFFFF</Color>
+  <Color x:Key="OreSecondaryFrame">#B5B5B5</Color>
+
+  <!-- ============ Contrast（金黄） ============ -->
+  <Color x:Key="OreContrast">#E0A800</Color>
+  <Color x:Key="OreContrastHover">#F5B800</Color>
+  <Color x:Key="OreContrastPressed">#C49300</Color>
+  <Color x:Key="OreContrastHighlight">#FFD54F</Color>
+  <Color x:Key="OreContrastFrame">#6E4E00</Color>
+
+  <!-- ============ Destructive（红，wiki 精确 #C93635 / #AD1C1C） ============ -->
+  <Color x:Key="OreDestructive">#C93635</Color>
+  <Color x:Key="OreDestructiveHover">#C02C2D</Color>
+  <Color x:Key="OreDestructivePressed">#AD1C1C</Color>
+  <Color x:Key="OreDestructiveHighlight">#E07A73</Color>
+  <Color x:Key="OreDestructiveFrame">#AD1C1C</Color>
+
+  <!-- ============ Realm（紫，wiki 精确 #7444E5 / #4A1BAC / 高光 #A264F2 #8D4BEC） ============ -->
+  <Color x:Key="OreRealm">#7444E5</Color>
+  <Color x:Key="OreRealmHover">#5C2CC5</Color>
+  <Color x:Key="OreRealmPressed">#4A1BAC</Color>
+  <Color x:Key="OreRealmHighlight">#A264F2</Color>
+  <Color x:Key="OreRealmFrame">#4A1BAC</Color>
+
+  <!-- ============ Transparent（透明按钮） ============ -->
+  <Color x:Key="OreTransparentHover">#24FFFFFF</Color>
+  <Color x:Key="OreTransparentPressed">#33FFFFFF</Color>
+
+  <!-- ============ 按钮通用 / 禁用 ============ -->
+  <Color x:Key="OreBtnFrame">#1B1B1B</Color>
+  <Color x:Key="OreBtnDisabled">#3A3A3A</Color>
+  <Color x:Key="OreBtnDisabledHighlight">#4A4A4A</Color>
+  <Color x:Key="OreBtnDisabledFrame">#2A2A2A</Color>
+
+  <!-- ============ 开关 / 滑块 / 进度 ============ -->
+  <Color x:Key="OreToggleOff">#5A5A5A</Color>
+  <Color x:Key="OreToggleOffHover">#6E6E6E</Color>
+  <Color x:Key="OreToggleThumb">#E8E8E8</Color>
+  <Color x:Key="OreTrack">#333333</Color>
+  <Color x:Key="OreTrackHover">#3D3D3D</Color>
+  <Color x:Key="OreThumb">#E8E8E8</Color>
+  <Color x:Key="OreThumbHover">#FFFFFF</Color>
+  <Color x:Key="OreThumbFrame">#555555</Color>
+
+  <!-- ============ 分隔线（default / light / dark） ============ -->
+  <Color x:Key="OreDividerDefault">#404040</Color>
+  <Color x:Key="OreDividerLight">#2E2E2E</Color>
+  <Color x:Key="OreDividerDark">#000000</Color>
+
+  <!-- ============ 物品槽 ============ -->
+  <Color x:Key="OreSlot">#1C1C1C</Color>
+  <Color x:Key="OreSlotHover">#2E2E2E</Color>
+
+  <!-- =====================================================================
+       画笔
+       ===================================================================== -->
+  <SolidColorBrush x:Key="OreBgBaseBrush" Color="{DynamicResource OreBgBase}"/>
+  <SolidColorBrush x:Key="OrePanelBrush" Color="{DynamicResource OrePanel}"/>
+  <SolidColorBrush x:Key="OrePanelAltBrush" Color="{DynamicResource OrePanelAlt}"/>
+  <SolidColorBrush x:Key="OreSurfaceHoverBrush" Color="{DynamicResource OreSurfaceHover}"/>
+  <SolidColorBrush x:Key="OreSurfacePressedBrush" Color="{DynamicResource OreSurfacePressed}"/>
+  <SolidColorBrush x:Key="OreSurfaceSelectedBrush" Color="{DynamicResource OreSurfaceSelected}"/>
+  <SolidColorBrush x:Key="OreBorderBrush" Color="{DynamicResource OreBorder}"/>
+  <SolidColorBrush x:Key="OreBorderStrongBrush" Color="{DynamicResource OreBorderStrong}"/>
+  <SolidColorBrush x:Key="OreOverlayBrush" Color="{DynamicResource OreOverlay}"/>
+
+  <SolidColorBrush x:Key="OreTextBrush" Color="{DynamicResource OreText}"/>
+  <SolidColorBrush x:Key="OreTextMutedBrush" Color="{DynamicResource OreTextMuted}"/>
+  <SolidColorBrush x:Key="OreTextDisabledBrush" Color="{DynamicResource OreTextDisabled}"/>
+  <SolidColorBrush x:Key="OreTextDangerBrush" Color="{DynamicResource OreTextDanger}"/>
+  <SolidColorBrush x:Key="OreTextSuccessBrush" Color="{DynamicResource OreTextSuccess}"/>
+
+  <SolidColorBrush x:Key="OreAccentBrush" Color="{DynamicResource OreAccent}"/>
+  <SolidColorBrush x:Key="OreAccentHoverBrush" Color="{DynamicResource OreAccentHover}"/>
+  <SolidColorBrush x:Key="OreAccentPressedBrush" Color="{DynamicResource OreAccentPressed}"/>
+  <SolidColorBrush x:Key="OreAccentHighlightBrush" Color="{DynamicResource OreAccentHighlight}"/>
+  <SolidColorBrush x:Key="OreAccentFrameBrush" Color="{DynamicResource OreAccentFrame}"/>
+
+  <SolidColorBrush x:Key="OreSecondaryBrush" Color="{DynamicResource OreSecondary}"/>
+  <SolidColorBrush x:Key="OreSecondaryHoverBrush" Color="{DynamicResource OreSecondaryHover}"/>
+  <SolidColorBrush x:Key="OreSecondaryPressedBrush" Color="{DynamicResource OreSecondaryPressed}"/>
+  <SolidColorBrush x:Key="OreSecondaryHighlightBrush" Color="{DynamicResource OreSecondaryHighlight}"/>
+  <SolidColorBrush x:Key="OreSecondaryFrameBrush" Color="{DynamicResource OreSecondaryFrame}"/>
+
+  <SolidColorBrush x:Key="OreContrastBrush" Color="{DynamicResource OreContrast}"/>
+  <SolidColorBrush x:Key="OreContrastHoverBrush" Color="{DynamicResource OreContrastHover}"/>
+  <SolidColorBrush x:Key="OreContrastPressedBrush" Color="{DynamicResource OreContrastPressed}"/>
+  <SolidColorBrush x:Key="OreContrastHighlightBrush" Color="{DynamicResource OreContrastHighlight}"/>
+  <SolidColorBrush x:Key="OreContrastFrameBrush" Color="{DynamicResource OreContrastFrame}"/>
+
+  <SolidColorBrush x:Key="OreDestructiveBrush" Color="{DynamicResource OreDestructive}"/>
+  <SolidColorBrush x:Key="OreDestructiveHoverBrush" Color="{DynamicResource OreDestructiveHover}"/>
+  <SolidColorBrush x:Key="OreDestructivePressedBrush" Color="{DynamicResource OreDestructivePressed}"/>
+  <SolidColorBrush x:Key="OreDestructiveHighlightBrush" Color="{DynamicResource OreDestructiveHighlight}"/>
+  <SolidColorBrush x:Key="OreDestructiveFrameBrush" Color="{DynamicResource OreDestructiveFrame}"/>
+
+  <SolidColorBrush x:Key="OreRealmBrush" Color="{DynamicResource OreRealm}"/>
+  <SolidColorBrush x:Key="OreRealmHoverBrush" Color="{DynamicResource OreRealmHover}"/>
+  <SolidColorBrush x:Key="OreRealmPressedBrush" Color="{DynamicResource OreRealmPressed}"/>
+  <SolidColorBrush x:Key="OreRealmHighlightBrush" Color="{DynamicResource OreRealmHighlight}"/>
+  <SolidColorBrush x:Key="OreRealmFrameBrush" Color="{DynamicResource OreRealmFrame}"/>
+
+  <SolidColorBrush x:Key="OreTransparentHoverBrush" Color="{DynamicResource OreTransparentHover}"/>
+  <SolidColorBrush x:Key="OreTransparentPressedBrush" Color="{DynamicResource OreTransparentPressed}"/>
+
+  <SolidColorBrush x:Key="OreBtnFrameBrush" Color="{DynamicResource OreBtnFrame}"/>
+  <SolidColorBrush x:Key="OreBtnDisabledBrush" Color="{DynamicResource OreBtnDisabled}"/>
+  <SolidColorBrush x:Key="OreBtnDisabledHighlightBrush" Color="{DynamicResource OreBtnDisabledHighlight}"/>
+  <SolidColorBrush x:Key="OreBtnDisabledFrameBrush" Color="{DynamicResource OreBtnDisabledFrame}"/>
+
+  <SolidColorBrush x:Key="OreToggleOffBrush" Color="{DynamicResource OreToggleOff}"/>
+  <SolidColorBrush x:Key="OreToggleOffHoverBrush" Color="{DynamicResource OreToggleOffHover}"/>
+  <SolidColorBrush x:Key="OreToggleThumbBrush" Color="{DynamicResource OreToggleThumb}"/>
+  <SolidColorBrush x:Key="OreTrackBrush" Color="{DynamicResource OreTrack}"/>
+  <SolidColorBrush x:Key="OreTrackHoverBrush" Color="{DynamicResource OreTrackHover}"/>
+  <SolidColorBrush x:Key="OreThumbBrush" Color="{DynamicResource OreThumb}"/>
+  <SolidColorBrush x:Key="OreThumbHoverBrush" Color="{DynamicResource OreThumbHover}"/>
+  <SolidColorBrush x:Key="OreThumbFrameBrush" Color="{DynamicResource OreThumbFrame}"/>
+
+  <SolidColorBrush x:Key="OreDividerDefaultBrush" Color="{DynamicResource OreDividerDefault}"/>
+  <SolidColorBrush x:Key="OreDividerLightBrush" Color="{DynamicResource OreDividerLight}"/>
+  <SolidColorBrush x:Key="OreDividerDarkBrush" Color="{DynamicResource OreDividerDark}"/>
+
+  <SolidColorBrush x:Key="OreSlotBrush" Color="{DynamicResource OreSlot}"/>
+  <SolidColorBrush x:Key="OreSlotHoverBrush" Color="{DynamicResource OreSlotHover}"/>
+
+  <!-- ============ 间距（官方 spacing） ============ -->
+  <x:Double x:Key="OreSpacingXs">2</x:Double>
+  <x:Double x:Key="OreSpacingSm">4</x:Double>
+  <x:Double x:Key="OreSpacingMd">8</x:Double>
+  <x:Double x:Key="OreSpacingLg">12</x:Double>
+  <x:Double x:Key="OreSpacingXl">16</x:Double>
+
+  <!-- ============ 尺寸（官方 OreUI 数值） ============ -->
+  <x:Double x:Key="OreControlHeight">27</x:Double>   <!-- tabs / toggleButton 高度 -->
+  <x:Double x:Key="OreToggleWidth">27</x:Double>     <!-- 开关宽 -->
+  <x:Double x:Key="OreToggleHeight">14</x:Double>    <!-- 开关高 -->
+  <x:Double x:Key="OreToggleThumbSize">12</x:Double> <!-- 开关滑块 -->
+  <x:Double x:Key="OreCheckSize">12</x:Double>       <!-- 复选/单选 12px -->
+  <x:Double x:Key="OreTrackHeight">6</x:Double>      <!-- 滑块轨道 -->
+  <x:Double x:Key="OreThumbSize">16</x:Double>       <!-- 滑块拇指 -->
+  <x:Double x:Key="OreMenuIconSize">16</x:Double>    <!-- 菜单行图标 -->
+  <x:Double x:Key="OreHeaderIconSize">15</x:Double>  <!-- Header 图标 -->
+  <x:Double x:Key="OreSlotSize">18</x:Double>        <!-- 物品槽 -->
+
+  <!-- 圆角：OreUI 为方角，保留最小圆角以适配高分屏 -->
+  <CornerRadius x:Key="OreRadiusSm">0</CornerRadius>
+  <CornerRadius x:Key="OreRadiusMd">0</CornerRadius>
+
+  <!-- 字体：嵌入 Minecraft 像素字体（OFL 开源矢量重制版），中文回退系统字体 -->
+  <FontFamily x:Key="OreFontFamily">avares://OreUI/Assets/Fonts/Minecraft.otf#Minecraft, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif</FontFamily>
+  <FontFamily x:Key="OreFontFamilyBody">avares://OreUI/Assets/Fonts/Minecraft.otf#Minecraft, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif</FontFamily>
+
+</ResourceDictionary>

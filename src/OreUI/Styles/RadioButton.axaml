@@ -1,0 +1,43 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- OreUI RadioButton：官方 12px 圆形，checked 绿色 + 白点 -->
+  <Styles.Resources>
+    <ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton">
+      <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+      <Setter Property="FontFamily" Value="{DynamicResource OreFontFamily}" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="RadioButton">
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+            <Grid Grid.Column="0" Width="{DynamicResource OreCheckSize}"
+                  Height="{DynamicResource OreCheckSize}" VerticalAlignment="Center">
+              <Ellipse x:Name="PART_Ring" Fill="#0F0F0F"
+                       Stroke="{DynamicResource OreBorderStrongBrush}" StrokeThickness="1" />
+              <Ellipse x:Name="PART_Dot" Width="6" Height="6"
+                       Fill="{DynamicResource OreTextBrush}" IsVisible="False" />
+            </Grid>
+            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}"
+                              VerticalAlignment="Center"
+                              Foreground="{TemplateBinding Foreground}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+
+      <Style Selector="^:checked /template/ Ellipse#PART_Ring">
+        <Setter Property="Fill" Value="{DynamicResource OreAccentBrush}" />
+        <Setter Property="Stroke" Value="{DynamicResource OreAccentFrameBrush}" />
+      </Style>
+      <Style Selector="^:checked /template/ Ellipse#PART_Dot">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Ellipse#PART_Ring">
+        <Setter Property="Stroke" Value="{DynamicResource OreAccentHighlightBrush}" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.45" />
+      </Style>
+    </ControlTheme>
+  </Styles.Resources>
+
+</Styles>
