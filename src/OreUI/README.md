@@ -1,5 +1,7 @@
 # CodeHub-OreUI
 
+![png-ore](Assets/oreui_contact_sheet.png)
+
 Minecraft 基岩版（Bedrock Edition）**OreUI** 风格的 **Avalonia 12** 控件库。
 
 提供一套贴近基岩版设置的视觉与交互规范：面板、按钮（hero / primary / secondary / destructive / default 变体）、开关、复选、单选、滑块、输入框、下拉、标签（Tag）、旋转环（Spinner）、进度条、选择列表（SelectionList）、菜单行（MenuRow）、标签页（TabControl）与模态（Modal）等。

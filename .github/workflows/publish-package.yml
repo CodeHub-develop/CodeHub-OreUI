@@ -1,5 +1,16 @@
 name: Publish to NuGet (Trusted Publishing)
 
+# ⚠️ 仓库改名提醒：本仓库已从 CodeHub-develop/CodeHub-OreUI 迁移到
+#    Hub-code-develop/CodeHub-OreUI。GitHub OIDC 签发的 token 里 repository
+#    subject 会自动跟随新名，因此本 workflow 无需改动；但 nuget.org 上的
+#    Trusted Publisher（受信任发布）策略仍绑定旧仓库名，会导致 push 新 tag 时
+#    `NuGet login` 报 401 "No matching trust policy"。
+# 修复方式（需在 nuget.org 网页操作，本仓库无法改）：
+#   包的 Manage → Trusted Publishers 里把策略的 Repository 改为
+#   `Hub-code-develop/CodeHub-OreUI`（NuGet 用户名须等于 secret NUGET_USER）。
+#   改完后可对已有 tag 直接 `gh run rerun <run-id> --repo Hub-code-develop/CodeHub-OreUI`，
+#   无需重新打 tag。
+
 on:
   push:
     tags:

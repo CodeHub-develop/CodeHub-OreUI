@@ -2,80 +2,95 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <!--
-    OreUI TabControl / TabItem
-    官方 tabs：27px 方块标签，未选中深灰 / 选中基岩绿（selectedDrop：选中文字下移 1px）。
+    OreUI TabControl / TabItem — 忠实复刻 Bedrock 顶部导航标签栏：
+    · 每个标签 = 小图标 + 文字（Header 可放任意内容，演示用 McTextBlock 渲染 MC 表情+文字）
+    · 未选中 = 面板底 + 右侧细分隔线，文字浅灰
+    · 选中   = 更亮的灰底（非绿按钮）+ 左侧亮边，文字转白
+    · hover / pressed 走 Opacity 过渡淡入淡出（与 Button 同款手感）
   -->
   <Styles.Resources>
+    <!-- 标签栏专用表面色（不污染全局 Token） -->
+    <SolidColorBrush x:Key="OreTabSelectedBrush">#2E2E2E</SolidColorBrush>
+    <SolidColorBrush x:Key="OreTabHoverBrush">#262626</SolidColorBrush>
+    <SolidColorBrush x:Key="OreTabPressedBrush">#161616</SolidColorBrush>
+    <SolidColorBrush x:Key="OreTabLeftEdgeBrush">#7C7C7C</SolidColorBrush>
+
     <ControlTheme x:Key="{x:Type TabItem}" TargetType="TabItem">
       <Setter Property="Foreground" Value="{DynamicResource OreTextMutedBrush}" />
       <Setter Property="FontFamily" Value="{DynamicResource OreFontFamily}" />
       <Setter Property="FontSize" Value="13" />
       <Setter Property="FontWeight" Value="SemiBold" />
-      <Setter Property="Padding" Value="14,4" />
       <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Padding" Value="12,0" />
+      <Setter Property="MinHeight" Value="34" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
       <Setter Property="Template">
         <ControlTemplate TargetType="TabItem">
-          <Grid Height="{DynamicResource OreControlHeight}">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="4" />
-              <RowDefinition Height="*" />
-              <RowDefinition Height="4" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="4" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="4" />
-            </Grid.ColumnDefinitions>
+          <Grid>
+            <!-- 选中底：更亮灰（非绿） -->
+            <Border x:Name="PART_SelectedFace" Background="{DynamicResource OreTabSelectedBrush}"
+                    IsVisible="False" />
+            <!-- 未选中底：透明，露出标签条面板色 -->
+            <Border x:Name="PART_Back" Background="Transparent" />
 
-            <!-- 未选中纹理 -->
-            <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource OreTab9TL}" />
-            <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource OreTab9T}" />
-            <Border Grid.Row="0" Grid.Column="2" Background="{DynamicResource OreTab9TR}" />
-            <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource OreTab9L}" />
-            <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource OreTab9C}" />
-            <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource OreTab9R}" />
-            <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource OreTab9BL}" />
-            <Border Grid.Row="2" Grid.Column="1" Background="{DynamicResource OreTab9B}" />
-            <Border Grid.Row="2" Grid.Column="2" Background="{DynamicResource OreTab9BR}" />
+            <!-- hover 提亮层（淡入淡出） -->
+            <Border x:Name="PART_Hover" Background="#1AFFFFFF" Opacity="0"
+                    IsHitTestVisible="False">
+              <Border.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.1" />
+                </Transitions>
+              </Border.Transitions>
+            </Border>
+            <!-- pressed 压暗层 -->
+            <Border x:Name="PART_Pressed" Background="#2A000000" Opacity="0"
+                    IsHitTestVisible="False">
+              <Border.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.1" />
+                </Transitions>
+              </Border.Transitions>
+            </Border>
 
-            <!-- 选中纹理（覆盖） -->
-            <Grid x:Name="PART_SelectedFace" IsVisible="False"
-                  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="4" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="4" />
-              </Grid.RowDefinitions>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4" />
-              </Grid.ColumnDefinitions>
-              <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource OreTabSel9TL}" />
-              <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource OreTabSel9T}" />
-              <Border Grid.Row="0" Grid.Column="2" Background="{DynamicResource OreTabSel9TR}" />
-              <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource OreTabSel9L}" />
-              <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource OreTabSel9C}" />
-              <Border Grid.Row="1" Grid.Column="2" Background="{DynamicResource OreTabSel9R}" />
-              <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource OreTabSel9BL}" />
-              <Border Grid.Row="2" Grid.Column="1" Background="{DynamicResource OreTabSel9B}" />
-              <Border Grid.Row="2" Grid.Column="2" Background="{DynamicResource OreTabSel9BR}" />
-            </Grid>
+            <!-- 右侧细分隔线（未选中时显示） -->
+            <Border x:Name="PART_Divider" BorderBrush="{DynamicResource OreDividerDefaultBrush}"
+                    BorderThickness="0,0,1,0" />
+            <!-- 选中左亮边 -->
+            <Border x:Name="PART_LeftEdge" BorderBrush="{DynamicResource OreTabLeftEdgeBrush}"
+                    BorderThickness="0" IsVisible="False" />
 
-            <ContentPresenter x:Name="PART_Label" Grid.Row="1" Grid.Column="1"
-                              Content="{TemplateBinding Header}"
+            <!-- 标签内容（图标+文字），水平居中 -->
+            <ContentPresenter x:Name="PART_Header" Content="{TemplateBinding Header}"
                               VerticalAlignment="Center" HorizontalAlignment="Center"
-                              Foreground="{TemplateBinding Foreground}" />
+                              Margin="{TemplateBinding Padding}" />
           </Grid>
         </ControlTemplate>
       </Setter>
 
-      <Style Selector="^:selected /template/ Grid#PART_SelectedFace">
+      <Style Selector="^:selected /template/ Border#PART_SelectedFace">
         <Setter Property="IsVisible" Value="True" />
       </Style>
-      <Style Selector="^:selected /template/ ContentPresenter#PART_Label">
-        <Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="RenderTransform" Value="translateY(1px)" />
+      <Style Selector="^:selected /template/ Border#PART_Divider">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:selected /template/ Border#PART_LeftEdge">
+        <Setter Property="BorderThickness" Value="2,0,0,0" />
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:selected /template/ ContentPresenter#PART_Header">
+        <Setter Property="Foreground" Value="{DynamicResource OreTextBrush}" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#PART_Hover">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+      <Style Selector="^:pressed /template/ Border#PART_Pressed">
+        <Setter Property="Opacity" Value="1" />
+      </Style>
+      <Style Selector="^:pressed /template/ Border#PART_Hover">
+        <Setter Property="Opacity" Value="0" />
+      </Style>
+      <Style Selector="^:disabled /template/ Border#PART_Hover">
+        <Setter Property="Opacity" Value="0" />
       </Style>
     </ControlTheme>
 
@@ -84,23 +99,24 @@
       <Setter Property="Template">
         <ControlTemplate TargetType="TabControl">
           <DockPanel>
-            <Border DockPanel.Dock="Top" BorderBrush="{DynamicResource OreBorderBrush}"
+            <!-- 标签条：面板底 + 底部 1px 分隔线 -->
+            <Border DockPanel.Dock="Top"
+                    Background="{DynamicResource OrePanelBrush}"
+                    BorderBrush="{DynamicResource OreDividerDefaultBrush}"
                     BorderThickness="0,0,0,1">
               <ScrollViewer HorizontalScrollBarVisibility="Auto"
                             VerticalScrollBarVisibility="Disabled">
                 <ItemsPresenter Name="PART_ItemsPresenter">
                   <ItemsPresenter.ItemsPanel>
                     <ItemsPanelTemplate>
-                      <StackPanel Orientation="Horizontal" />
+                      <StackPanel Orientation="Horizontal" Spacing="0" />
                     </ItemsPanelTemplate>
                   </ItemsPresenter.ItemsPanel>
                 </ItemsPresenter>
               </ScrollViewer>
             </Border>
-            <Border>
-              <Border.Background>
-                <ImageBrush Source="avares://OreUI/Assets/Textures/panel.png" Stretch="Fill" />
-              </Border.Background>
+            <!-- 内容区 -->
+            <Border Background="{DynamicResource OrePanelBrush}">
               <ContentPresenter Name="PART_SelectedContentHost"
                                 Content="{TemplateBinding SelectedContent}" />
             </Border>
@@ -108,26 +124,6 @@
         </ControlTemplate>
       </Setter>
     </ControlTheme>
-
-    <ImageBrush x:Key="OreTab9TL" Source="avares://OreUI/Assets/Textures/tab_normal_tl.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9T" Source="avares://OreUI/Assets/Textures/tab_normal_t.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9TR" Source="avares://OreUI/Assets/Textures/tab_normal_tr.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9L" Source="avares://OreUI/Assets/Textures/tab_normal_l.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9C" Source="avares://OreUI/Assets/Textures/tab_normal_c.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9R" Source="avares://OreUI/Assets/Textures/tab_normal_r.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9BL" Source="avares://OreUI/Assets/Textures/tab_normal_bl.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9B" Source="avares://OreUI/Assets/Textures/tab_normal_b.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTab9BR" Source="avares://OreUI/Assets/Textures/tab_normal_br.png" Stretch="Fill" />
-
-    <ImageBrush x:Key="OreTabSel9TL" Source="avares://OreUI/Assets/Textures/tab_selected_tl.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9T" Source="avares://OreUI/Assets/Textures/tab_selected_t.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9TR" Source="avares://OreUI/Assets/Textures/tab_selected_tr.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9L" Source="avares://OreUI/Assets/Textures/tab_selected_l.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9C" Source="avares://OreUI/Assets/Textures/tab_selected_c.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9R" Source="avares://OreUI/Assets/Textures/tab_selected_r.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9BL" Source="avares://OreUI/Assets/Textures/tab_selected_bl.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9B" Source="avares://OreUI/Assets/Textures/tab_selected_b.png" Stretch="Fill" />
-    <ImageBrush x:Key="OreTabSel9BR" Source="avares://OreUI/Assets/Textures/tab_selected_br.png" Stretch="Fill" />
   </Styles.Resources>
 
 </Styles>
