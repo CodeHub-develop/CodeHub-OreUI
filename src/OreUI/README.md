@@ -1,6 +1,6 @@
 # CodeHub-OreUI
 
-<img width="562" height="322" alt="oreui_contact_sheet" src="https://github.com/user-attachments/assets/d0853ca0-4d57-4019-a1ca-462533f34ee8" />
+<img width="562" height="322" alt="oreui_contact_sheet" src="https://raw.githubusercontent.com/Hub-code-develop/CodeHub-OreUI/main/src/OreUI/Assets/oreui_contact_sheet.png" />
 
 Minecraft 基岩版（Bedrock Edition）**OreUI** 风格的 **Avalonia 12** 控件库。
 
